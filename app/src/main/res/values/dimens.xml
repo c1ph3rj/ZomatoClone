@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="height">300dp</dimen>
+    <dimen name="H_300dp">300dp</dimen>
+    <dimen name="H_400dp">400dp</dimen>
+    <dimen name="TS_24sp">24sp</dimen>
+    <dimen name="TS_12sp">12sp</dimen>
 </resources>
