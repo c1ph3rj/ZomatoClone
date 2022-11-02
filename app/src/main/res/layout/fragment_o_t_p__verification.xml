@@ -13,6 +13,8 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/dm_bold"
         android:gravity="center"
         android:text="@string/otp_verification_Text"
@@ -34,20 +36,19 @@
         android:text="@string/we_have_sent_a_verification_code_to_Text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.094" />
+        app:layout_constraintVertical_bias="0.199" />
 
     <TextView
         android:id="@+id/mobileNumberDisplay"
         style="@style/NormalText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/M_4dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/dm_bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -55,19 +56,18 @@
         android:id="@+id/OTPField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
         android:ems="9"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:letterSpacing="1"
-        android:backgroundTint="@color/black"
         android:maxLength="6"
         android:textColor="?attr/colorPrimaryVariant"
         app:layout_constraintBottom_toTopOf="@+id/verifyButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mobileNumberDisplay"
-        app:layout_constraintVertical_bias="0.476"
+        app:layout_constraintVertical_bias="0.481"
         tools:ignore="LabelFor" />
 
     <com.google.android.material.button.MaterialButton
@@ -75,11 +75,11 @@
         style="@style/NormalButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="488dp"
+        android:layout_marginBottom="372dp"
         android:text="@string/verify_Text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
 

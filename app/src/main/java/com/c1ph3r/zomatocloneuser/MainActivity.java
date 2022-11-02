@@ -84,15 +84,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
-            MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
-            fragment = new OTP_Verification(Objects.requireNonNull(MAIN.mobileNumber.getText()).toString(),code);
-            fragmentTransaction = getSupportFragmentManager().beginTransaction().add(R.id.Login_Activity, fragment).addToBackStack("OnBackPressed");
         }
 
         // After verification code successfully sent to the user. this method will be executes.
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
             code = phoneAuthCredential.getSmsCode();
+            MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
+            System.out.println(MAIN.mobileNumber.getText());
+            fragment = new OTP_Verification(Objects.requireNonNull(MAIN.mobileNumber.getText()).toString(),code, AUTH, phoneAuthCredential);
+            fragmentTransaction = getSupportFragmentManager().beginTransaction().add(R.id.Login_Activity, fragment).addToBackStack("OnBackPressed");
             fragmentTransaction.commit();
         }
 
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(e.getMessage());
         }
     };
+
 
 
     @Override
