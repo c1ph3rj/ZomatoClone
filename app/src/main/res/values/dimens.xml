@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+    H  - Height
+    W  - Width
+    TS - TextSize
+    E  - Elevation
+    M  - Margin
+    -->
+
+
     <dimen name="H_300dp">300dp</dimen>
     <dimen name="H_400dp">400dp</dimen>
     <dimen name="TS_24sp">24sp</dimen>
     <dimen name="TS_12sp">12sp</dimen>
+    <dimen name="TS_18sp">18sp</dimen>
+    <dimen name="TS_14sp">14sp</dimen>
+    <dimen name="R_12dp">12dp</dimen>
+    <dimen name="W_260dp">260dp</dimen>
+    <dimen name="W_2dp">2dp</dimen>
+    <dimen name="E_4dp">4dp</dimen>
+    <dimen name="H_45dp">45dp</dimen>
+    <dimen name="M_24dp">24dp</dimen>
+    <dimen name="M_4dp">4dp</dimen>
+
+
 </resources>

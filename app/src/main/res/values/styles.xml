@@ -4,8 +4,8 @@
     <style name="NormalButtons" parent="@style/Widget.MaterialComponents.Button">
         <item name="android:layout_height">55dp</item>
         <item name="fontFamily">@font/dm_bold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="cornerRadius">10dp</item>
+        <item name="android:textSize">@dimen/TS_14sp</item>
+        <item name="cornerRadius">@dimen/R_12dp</item>
         <item name="android:elevation">4dp</item>
         <item name="android:layout_width">260dp</item>
         <item name="android:backgroundTint">?attr/colorSecondary</item>
@@ -14,13 +14,21 @@
     <style name="NormalTextFields" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">?attr/colorSecondary</item>
         <item name="boxStrokeWidth">2dp</item>
-        <item name="boxCornerRadiusTopStart">12dp</item>
-        <item name="boxCornerRadiusTopEnd">12dp</item>
-        <item name="boxCornerRadiusBottomEnd">12dp</item>
-        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/R_12dp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/R_12dp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/R_12dp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/R_12dp</item>
         <item name="fontFamily">@font/dm_regular</item>
-        <item name="android:layout_width">260dp</item>
-        <item name="android:textColorHint">?attr/colorPrimaryVariant</item>
+        <item name="android:layout_width">@dimen/W_260dp</item>
+        <item name="android:textColorHint">@color/lightWhite</item>
+    </style>
+
+
+
+    <style name="NormalText" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/TS_14sp</item>
+        <item name="android:fontFamily">@font/dm_regular</item>
+        <item name="android:textColor">?attr/colorPrimaryVariant</item>
     </style>
 
 
