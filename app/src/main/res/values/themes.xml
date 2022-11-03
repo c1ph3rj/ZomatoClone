@@ -2,10 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.ZomatoCloneUser" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#cb202d</item>
+        <item name="colorPrimary">#de3241</item>
         <item name="colorPrimaryVariant">#2d2d2d</item>
         <item name="colorOnPrimary">#f4f4f2</item>
-        <item name="android:textColorPrimary">#2d2d2d</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#f04f5f</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

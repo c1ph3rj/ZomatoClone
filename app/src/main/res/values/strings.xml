@@ -8,7 +8,7 @@
     <string name="MOBILE_NO_PATTERN">^[6-9][0-9]{9}$</string>
     <string name="Not_Valid_Mobile_No">Enter a valid Mobile Number!</string>
     <string name="exception_1">Unable To Send Code!</string>
-    <string name="exception_2">\" EXCEPTION IN SEND OTP TO THE USER !\"</string>
+    <string name="exception_2"> EXCEPTION IN SEND OTP TO THE USER !</string>
     <string name="country_code_Text">+91</string>
     <string name="otp_verification_Text">OTP Verification</string>
     <string name="we_have_sent_a_verification_code_to_Text">We have sent a verification code to</string>

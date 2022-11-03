@@ -19,8 +19,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class OTP_Verification extends Fragment {
@@ -76,11 +74,10 @@ public class OTP_Verification extends Fragment {
     }
 
     private void signInTheUser() {
-        AUTH.signInWithCustomToken(mobileNumber).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        AUTH.signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    FirebaseFirestore Database = FirebaseFirestore.getInstance();
                     Toast.makeText(requireActivity(), "Logged In.", Toast.LENGTH_SHORT).show();
                 }
                 else
