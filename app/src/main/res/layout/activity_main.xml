@@ -63,6 +63,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mobileNumber"
+                android:textColor="?attr/colorPrimaryVariant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/phone_number_Text"
@@ -130,11 +131,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/metropolis_semi_bold"
-            android:lineSpacingExtra="4sp"
-            android:text="By continuing, you agree to our\n Terms of Service Privacy Policy Content Policy"
+            android:lineSpacingExtra="@dimen/LineSpacing_4sp"
+            android:text="@string/by_continuing_you_agree_to_our_n_terms_of_service_privacy_policy_content_policy_Text"
             android:textAlignment="center"
             android:textColor="?attr/colorPrimaryVariant"
-            android:textSize="10sp"
+            android:textSize="@dimen/TS_10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"

@@ -22,6 +22,8 @@
     <dimen name="H_45dp">45dp</dimen>
     <dimen name="M_24dp">24dp</dimen>
     <dimen name="M_4dp">4dp</dimen>
+    <dimen name="TS_10sp">10sp</dimen>
+    <dimen name="LineSpacing_4sp">4sp</dimen>
 
 
 </resources>

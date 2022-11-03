@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     String code;
     FragmentTransaction fragmentTransaction;
     Fragment fragment;
+    String verificationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,17 +85,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
+            verificationId = s;
+            verifyTheOTP(verificationId);
         }
 
         // After verification code successfully sent to the user. this method will be executes.
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
             code = phoneAuthCredential.getSmsCode();
-            MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
-            System.out.println(MAIN.mobileNumber.getText());
-            fragment = new OTP_Verification(Objects.requireNonNull(MAIN.mobileNumber.getText()).toString(),code, AUTH, phoneAuthCredential);
-            fragmentTransaction = getSupportFragmentManager().beginTransaction().add(R.id.Login_Activity, fragment).addToBackStack("OnBackPressed");
-            fragmentTransaction.commit();
+
         }
 
         // If the attempt to send the code to the user is failed this method will be executed.
@@ -106,6 +105,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private void verifyTheOTP(String verificationId) {
+        MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
+        System.out.println(MAIN.mobileNumber.getText());
+        fragment = new OTP_Verification(Objects.requireNonNull(MAIN.mobileNumber.getText()).toString(), AUTH, verificationId);
+        fragmentTransaction = getSupportFragmentManager().beginTransaction().add(R.id.Login_Activity, fragment).addToBackStack("OnBackPressed");
+        fragmentTransaction.commit();
+    }
 
 
     @Override

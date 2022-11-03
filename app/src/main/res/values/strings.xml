@@ -13,4 +13,5 @@
     <string name="otp_verification_Text">OTP Verification</string>
     <string name="we_have_sent_a_verification_code_to_Text">We have sent a verification code to</string>
     <string name="verify_Text">Verify</string>
+    <string name="by_continuing_you_agree_to_our_n_terms_of_service_privacy_policy_content_policy_Text">By continuing, you agree to our\n Terms of Service Privacy Policy Content Policy</string>
 </resources>

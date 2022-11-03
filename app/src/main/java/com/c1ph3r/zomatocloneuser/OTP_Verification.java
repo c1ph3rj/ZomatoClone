@@ -14,27 +14,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 
 public class OTP_Verification extends Fragment {
-    String mobileNumber, code;
+    String mobileNumber;
     FirebaseAuth AUTH;
     PhoneAuthCredential phoneAuthCredential;
+    String verificationId;
 
     public OTP_Verification() {
         // Required empty public constructor
     }
 
-    public OTP_Verification(String mobileNumber, String code, FirebaseAuth AUTH, PhoneAuthCredential phoneAuthCredential) {
+    public OTP_Verification(String mobileNumber, FirebaseAuth AUTH, String verificationId) {
         this.mobileNumber = mobileNumber;
-        this.code = code;
         this.AUTH = AUTH;
-        this.phoneAuthCredential = phoneAuthCredential;
+        this.verificationId = verificationId;
     }
 
 
@@ -56,13 +58,11 @@ public class OTP_Verification extends Fragment {
             MaterialButton back = view.findViewById(R.id.backToLogin);
 
             verifyOTP.setOnClickListener(OnClickVerify ->{
-                if(!OTP.getText().toString().equals(code))
-                    Toast.makeText(requireActivity(), "Wrong OTP!", Toast.LENGTH_SHORT).show();
-                else {
-                    startActivity(new Intent(requireActivity(), Dashboard.class));
+                if(OTP.getText().length() == 6){
+                    phoneAuthCredential = PhoneAuthProvider.getCredential(verificationId, OTP.getText().toString());
                     signInTheUser();
-                    Toast.makeText(requireActivity(), "Successfully Logged In.", Toast.LENGTH_SHORT).show();
-                }
+                }else
+                    Toast.makeText(requireActivity(), "Enter a valid OTP!", Toast.LENGTH_SHORT).show();
             });
 
 
@@ -74,16 +74,14 @@ public class OTP_Verification extends Fragment {
     }
 
     private void signInTheUser() {
-        AUTH.signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(requireActivity(), "Logged In.", Toast.LENGTH_SHORT).show();
-                }
-                else
-                    Toast.makeText(requireActivity(), "failed", Toast.LENGTH_SHORT).show();
+        AUTH.signInWithCredential(phoneAuthCredential).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                changePage();
+                Toast.makeText(requireActivity(), "Logged In.", Toast.LENGTH_SHORT).show();
             }
-        });
+            else
+                Toast.makeText(requireActivity(), "failed", Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener(Throwable::printStackTrace);
     }
 
 
@@ -91,10 +89,15 @@ public class OTP_Verification extends Fragment {
     public void onStart() {
         super.onStart();
         View view = getView();
-        TextView mobileNumberDisplay = view.findViewById(R.id.mobileNumberDisplay);
-        this.mobileNumber = getString(R.string.country_code_Text)+ mobileNumber;
-        System.out.println(mobileNumber);
-        mobileNumberDisplay.setText(mobileNumber);
+        if(view != null){
+            TextView mobileNumberDisplay = view.findViewById(R.id.mobileNumberDisplay);
+            this.mobileNumber = getString(R.string.country_code_Text)+ mobileNumber;
+            System.out.println(mobileNumber);
+            mobileNumberDisplay.setText(mobileNumber);
+        }
+    }
 
+    void changePage(){
+        startActivity(new Intent(requireActivity(), Dashboard.class));
     }
 }
