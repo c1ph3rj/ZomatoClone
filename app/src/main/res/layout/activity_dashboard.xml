@@ -1,22 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".Dashboard">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:background="@color/white"
+        android:layout_height="200dp"
+        android:layout_width="match_parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:toolbarId="@+id/toolbar"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/white">
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:background="@color/white"
+                android:layout_height="100dp"
+                android:layout_width="match_parent">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:stretchColumns="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                    <TableRow
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                       <ImageView
+                           android:layout_width="35dp"
+                           android:layout_height="35dp"
+                           android:src="@drawable/location_ic"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/Area"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/dm_bold"
+                                android:gravity="center"
+                                android:paddingLeft="6dp"
+                                android:text="Area"
+                                android:textColor="@color/black"
+                                app:drawableEndCompat="@drawable/down_ic" />
+
+                            <TextView
+                                android:id="@+id/City"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/dm_bold"
+                                android:paddingLeft="6dp"
+                                android:text="City"
+                                android:textColor="@color/lightWhite" />
+
+                        </LinearLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="60dp"
+                            android:background="@color/lightWhite"
+                            app:cardCornerRadius="180dp"
+                            android:layout_marginEnd="30dp"
+                            android:layout_height="60dp"/>
+
+                    </TableRow>
+
+
+                </TableLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:elevation="8dp"
+                android:layout_gravity="bottom|center"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/NormalTextFields"
+                    android:layout_width="@dimen/W_300dp"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="hint" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemIconTint="@drawable/bottom_navbar_item_background"
-        app:itemTextColor="@drawable/bottom_navbar_item_background"
-        android:background="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context=".Dashboard">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        app:tabIndicatorGravity="top"
+        app:tabTextAppearance="@style/tabText"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIconTint="@drawable/bottom_navbar_item_background"
+        app:tabTextColor="?attr/colorPrimaryVariant"
+        app:tabSelectedTextColor="?attr/colorPrimary"
+        android:background="@color/white"
+        app:tabInlineLabel="true"
+        android:layout_height="@dimen/H_45dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/delivery_ic"
+            android:text="Delivery" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/history_ic"
+            android:text="History" />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

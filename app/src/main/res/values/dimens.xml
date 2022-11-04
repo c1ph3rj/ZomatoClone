@@ -24,6 +24,7 @@
     <dimen name="M_4dp">4dp</dimen>
     <dimen name="TS_10sp">10sp</dimen>
     <dimen name="LineSpacing_4sp">4sp</dimen>
+    <dimen name="W_300dp">300dp</dimen>
 
 
 </resources>
