@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:background="@color/white"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/H_220dp"
         android:layout_width="match_parent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -23,7 +23,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:background="@color/white"
-                android:layout_height="100dp"
+                android:layout_height="@dimen/H_110dp"
                 android:layout_width="match_parent">
 
                 <TableLayout
@@ -33,15 +33,22 @@
                     android:stretchColumns="1">
                     <TextView
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/TS_18sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/secular_regular"
+                        android:text="@string/zomato_Text"/>
                     <TableRow
                         android:gravity="center_vertical"
+                        android:padding="@dimen/P_4dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" >
 
                        <ImageView
-                           android:layout_width="35dp"
-                           android:layout_height="35dp"
-                           android:src="@drawable/location_ic"/>
+                           android:layout_width="@dimen/W_35dp"
+                           android:layout_height="@dimen/H_35dp"
+                           android:src="@drawable/location_ic"
+                           android:contentDescription="@string/location_icon_Label" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -54,28 +61,41 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/dm_bold"
                                 android:gravity="center"
-                                android:paddingLeft="6dp"
-                                android:text="Area"
+                                android:paddingStart="@dimen/P_6dp"
+                                android:text="@string/area_Text"
                                 android:textColor="@color/black"
-                                app:drawableEndCompat="@drawable/down_ic" />
+                                app:drawableEndCompat="@drawable/down_ic"
+                                tools:ignore="RtlSymmetry" />
 
                             <TextView
                                 android:id="@+id/City"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/dm_bold"
-                                android:paddingLeft="6dp"
-                                android:text="City"
-                                android:textColor="@color/lightWhite" />
+                                android:paddingStart="@dimen/P_6dp"
+                                android:text="@string/city_Text"
+                                android:textColor="@color/lightWhite"
+                                tools:ignore="RtlSymmetry" />
 
                         </LinearLayout>
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="60dp"
-                            android:background="@color/lightWhite"
-                            app:cardCornerRadius="180dp"
-                            android:layout_marginEnd="30dp"
-                            android:layout_height="60dp"/>
+                            android:layout_width="@dimen/W_50dp"
+                            app:cardCornerRadius="@dimen/R_200dp"
+                            android:elevation="@dimen/E_2dp"
+                            android:layout_marginEnd="@dimen/M_30dp"
+                            android:backgroundTint="@color/white"
+                            android:layout_height="@dimen/H_50dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/W_50dp"
+                                android:layout_height="@dimen/H_50dp"
+                                android:scaleType="center"
+
+                                android:src="@drawable/ic_baseline_person_24"
+                                android:contentDescription="@string/profileIconLabel_Text" />
+
+                        </androidx.cardview.widget.CardView>
 
                     </TableRow>
 
@@ -86,8 +106,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:elevation="8dp"
+                android:layout_height="@dimen/H_110dp"
+                android:paddingTop="@dimen/P_6dp"
+                android:elevation="@dimen/E_8dp"
                 android:layout_gravity="bottom|center"
                 android:background="@color/white"
                 android:gravity="center_horizontal"
@@ -95,13 +116,14 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/NormalTextFields"
+                    android:padding="@dimen/P_4dp"
                     android:layout_width="@dimen/W_300dp"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="hint" />
+                        android:hint="@string/search_Text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -116,20 +138,28 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/Content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:minHeight="@dimen/H_400dp"
             android:background="@color/white"
             tools:context=".Dashboard">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/LayoutForFragments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
+        android:id="@+id/BottomNav"
         app:tabIndicatorGravity="top"
         app:tabTextAppearance="@style/tabText"
         app:tabIndicatorAnimationMode="elastic"
@@ -142,15 +172,11 @@
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/delivery_ic"
-            android:text="Delivery" />
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/history_ic"
-            android:text="History" />
+            android:layout_height="wrap_content" />
 
 
     </com.google.android.material.tabs.TabLayout>

@@ -14,4 +14,13 @@
     <string name="we_have_sent_a_verification_code_to_Text">We have sent a verification code to</string>
     <string name="verify_Text">Verify</string>
     <string name="by_continuing_you_agree_to_our_n_terms_of_service_privacy_policy_content_policy_Text">By continuing, you agree to our\n Terms of Service Privacy Policy Content Policy</string>
+    <string name="LayoutName_One">Home</string>
+    <string name="LayoutName_Two">History</string>
+    <string name="area_Text">Area</string>
+    <string name="city_Text">City</string>
+    <string name="zomato_Text">Zomato</string>
+    <string name="location_icon_Label">Location Icon</string>
+    <string name="profileIconLabel_Text">ProfileIconLabel</string>
+    <string name="search_Text">Search</string>
+    <string name="eat_a_lot_today_n_and_again_tomorrow_Text">Eat a lot today \n(and again tomorrow 🤫).</string>
 </resources>

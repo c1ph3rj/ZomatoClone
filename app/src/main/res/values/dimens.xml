@@ -25,6 +25,22 @@
     <dimen name="TS_10sp">10sp</dimen>
     <dimen name="LineSpacing_4sp">4sp</dimen>
     <dimen name="W_300dp">300dp</dimen>
+    <dimen name="H_110dp">110dp</dimen>
+    <dimen name="P_4dp">4dp</dimen>
+    <dimen name="W_35dp">35dp</dimen>
+    <dimen name="H_35dp">35dp</dimen>
+    <dimen name="P_6dp">6dp</dimen>
+    <dimen name="W_50dp">50dp</dimen>
+    <dimen name="R_200dp">200dp</dimen>
+    <dimen name="E_2dp">2dp</dimen>
+    <dimen name="M_30dp">30dp</dimen>
+    <dimen name="H_50dp">50dp</dimen>
+    <dimen name="E_8dp">8dp</dimen>
+    <dimen name="H_220dp">220dp</dimen>
+    <dimen name="H_55dp">55dp</dimen>
+    <dimen name="H_276dp">276dp</dimen>
+    <dimen name="TS_40sp">40sp</dimen>
+    <dimen name="M_220dp">220dp</dimen>
 
 
 </resources>
