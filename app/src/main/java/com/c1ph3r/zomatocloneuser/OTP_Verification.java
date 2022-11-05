@@ -1,9 +1,11 @@
 package com.c1ph3r.zomatocloneuser;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,11 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -98,6 +96,12 @@ public class OTP_Verification extends Fragment {
     }
 
     void changePage(){
-        startActivity(new Intent(requireActivity(), Dashboard.class));
+        Intent intent;
+        if(!(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+            intent = new Intent(requireActivity(), EnableLocationPermission.class);
+        }else{
+            intent = new Intent(requireActivity(), Dashboard.class);
+        }
+        startActivity(intent);
     }
 }
