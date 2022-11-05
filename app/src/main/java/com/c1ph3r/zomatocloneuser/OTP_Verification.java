@@ -56,7 +56,7 @@ public class OTP_Verification extends Fragment {
             MaterialButton back = view.findViewById(R.id.backToLogin);
 
             verifyOTP.setOnClickListener(OnClickVerify ->{
-                if(OTP.getText().length() == 6){
+                if(OTP.getText().length() == 6 ){
                     phoneAuthCredential = PhoneAuthProvider.getCredential(verificationId, OTP.getText().toString());
                     signInTheUser();
                 }else

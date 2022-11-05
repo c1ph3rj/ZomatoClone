@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         View view = MAIN.getRoot();
         setContentView(view);
 
-        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
         getLocationPermission();
 
         // Firebase App Device Verification check.
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getSupportFragmentManager().getBackStackEntryCount()>0)
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0)
             getSupportFragmentManager().popBackStackImmediate();
     }
 }
