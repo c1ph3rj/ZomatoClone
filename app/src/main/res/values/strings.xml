@@ -23,4 +23,11 @@
     <string name="profileIconLabel_Text">ProfileIconLabel</string>
     <string name="search_Text">Search</string>
     <string name="eat_a_lot_today_n_and_again_tomorrow_Text">Eat a lot today \n(and again tomorrow 🤫).</string>
+    <string name="ValidOTP_Error_Text">Enter a valid OTP!</string>
+    <string name="LoginStatus1">Logged In.</string>
+    <string name="LoginStatus_2">failed</string>
+    <string name="LocationPermissionDialogTitle">Location Permission Required!</string>
+    <string name="ReasonForLocationPermission">\"Please enable device location to ensure accurate address and fast delivery \"</string>
+    <string name="EnableLocationBtn_Text">Enable location permission</string>
+    <string name="package_Text">package</string>
 </resources>

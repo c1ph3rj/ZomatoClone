@@ -1,13 +1,16 @@
 package com.c1ph3r.zomatocloneuser;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     String verificationId;
     private final static int REQUEST_CODE = 1;
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         View view = MAIN.getRoot();
         setContentView(view);
 
-        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
         getLocationPermission();
 
         // Firebase App Device Verification check.
@@ -70,9 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getLocationPermission() {
-        if(!(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-        }
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
     }
 
     private void sendOTPToTheUser() {
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    // Method to verify the user input with sent OTP.
     private void verifyTheOTP(String verificationId) {
         MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
         System.out.println(MAIN.mobileNumber.getText());
