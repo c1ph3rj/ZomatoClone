@@ -28,22 +28,29 @@ import com.c1ph3r.zomatocloneuser.Adapter.BottomNavAdapter;
 import com.c1ph3r.zomatocloneuser.databinding.ActivityDashboardBinding;
 import com.c1ph3r.zomatocloneuser.databinding.ActivityMainBinding;
 import com.google.android.gms.common.internal.Constants;
+import com.google.android.gms.location.CurrentLocationRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.Granularity;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import com.google.android.gms.tasks.CancellationToken;
+import com.google.android.gms.tasks.CancellationTokenSource;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import org.checkerframework.checker.units.qual.C;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class Dashboard extends AppCompatActivity implements LocationListener {
     // Declaring a variable.
     private ActivityDashboardBinding DASHBOARD;
-    private FusedLocationProviderClient fusedLocation;
-    private Location location;
+    Address address;
 
     // Dashboard.
     @SuppressLint("MissingPermission")
@@ -67,7 +74,6 @@ public class Dashboard extends AppCompatActivity implements LocationListener {
     }// End Of OnCreate.
 
 
-
     // Bottom Navigation Initialization.
     private void bottomNavigation() {
         String[] listOfNames = {getString(R.string.LayoutName_One), getString(R.string.LayoutName_Two)};
@@ -86,7 +92,6 @@ public class Dashboard extends AppCompatActivity implements LocationListener {
     }// End Of BottomNavigation.
 
 
-
     // Method to check app has location permission if not forward to EnableLocationPermission page.
     private void getLocationPermissionCheck() {
         if (!(ContextCompat.checkSelfPermission(Dashboard.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
@@ -95,27 +100,36 @@ public class Dashboard extends AppCompatActivity implements LocationListener {
     }// End of getLocationPermissionCheck.
 
 
-
     // Method to Fetch user Location
     @SuppressLint("MissingPermission")
     void getUserLocation() {
-        fusedLocation = LocationServices.getFusedLocationProviderClient(Dashboard.this);
-        fusedLocation.getLastLocation().addOnSuccessListener(location -> this.location = location).addOnFailureListener(Throwable::printStackTrace);
-
-        try{
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        CancellationTokenSource ct = new CancellationTokenSource();
+        ct.getToken();
+        FusedLocationProviderClient fusedLocation = LocationServices.getFusedLocationProviderClient(Dashboard.this);
+        fusedLocation.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, ct.getToken()).addOnSuccessListener(this, location -> {
+            Geocoder fetchAddress = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses;
+            try {
+                addresses= fetchAddress.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                address  = addresses.get(0);
+                setDataToTheDashboard();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).addOnFailureListener(Throwable::printStackTrace);
 
     }// End of getUserLocation.
 
+    private void setDataToTheDashboard() {
+        DASHBOARD.Area.setText(address.getSubLocality());
+        String city = address.getLocality() + ","+ address.getAdminArea() + ".";
+        DASHBOARD.City.setText(city);
+    }
 
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        System.out.println(location.getLatitude() + " qwerty");
+
     }
 
     @Override
