@@ -13,6 +13,7 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.c1ph3r.zomatocloneuser.FireBaseFireStore.DataBase;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
@@ -20,6 +21,7 @@ import com.google.android.gms.tasks.CancellationTokenSource;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -48,6 +50,9 @@ public class SplashScreen extends AppCompatActivity {
             startActivity(intent);
             finish();
         }, LOADING_TIME);
+
+
+
     }
 
 
@@ -69,24 +74,13 @@ public class SplashScreen extends AppCompatActivity {
         ct.getToken();
         FusedLocationProviderClient fusedLocation = LocationServices.getFusedLocationProviderClient(SplashScreen.this);
         fusedLocation.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, ct.getToken()).addOnSuccessListener(this, location -> {
-            Geocoder fetchAddress = new Geocoder(this, Locale.getDefault());
-            List<Address> addresses;
-            Address address = null;
-            try {
-                addresses= fetchAddress.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                address  = addresses.get(0);
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-            assert address != null;
-            Map<String , String> currentAddress = new HashMap<>();
-            currentAddress.put("doorNo", String.valueOf(address.getLocale()));
-            currentAddress.put("area", address.getSubLocality());
-            currentAddress.put("city", address.getLocality());
-            currentAddress.put("state", address.getAdminArea());
-            currentAddress.put("longitude", String.valueOf(address.getLongitude()));
-            currentAddress.put("latitude", String.valueOf(address.getLatitude()));
-            user.update("currentAddress", currentAddress);
+            user.update("address", new GeoPoint(location.getLatitude(), location.getLongitude()));
         }).addOnFailureListener(Throwable::printStackTrace);
+    }
+
+
+    public void userData(){
+        DataBase userDB = new DataBase();
+        userDB.getUserData(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
     }
 }
