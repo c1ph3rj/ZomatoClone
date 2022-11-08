@@ -10,19 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.c1ph3r.zomatocloneuser.R;
 
-public class FavItems extends RecyclerView.Adapter<FavItems.MyViewHolder> {
-    private final Context context;
+public class ListOfAllItems extends RecyclerView.Adapter<ListOfAllItems.MyViewHolder> {
+    Context context;
 
-    public FavItems(Context context) {
+    public ListOfAllItems(Context context) {
         this.context = context;
     }
-
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.list_of_fav_items_layout, parent, false);
+        View view = inflater.inflate(R.layout.restaurants_list_item_layout, parent, false);
         return new MyViewHolder(view);
     }
 

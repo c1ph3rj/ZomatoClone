@@ -22,7 +22,7 @@ public class UserDetails {
         this.profilePic = profilePic;
     }
 
-    public UserDetails(){
+    public UserDetails() {
 
     }
 
@@ -30,48 +30,48 @@ public class UserDetails {
         return userName;
     }
 
-    public List<String> getListOfAddress() {
-        return listOfAddress;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
-    public void setOrderHistory(List<String> orderHistory) {
-        this.orderHistory = orderHistory;
-    }
-
-    public GeoPoint getAddress() {
-        return address;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public List<String> getListOfAddress() {
+        return listOfAddress;
     }
 
     public void setListOfAddress(List<String> listOfAddress) {
         this.listOfAddress = listOfAddress;
     }
 
+    public GeoPoint getAddress() {
+        return address;
+    }
+
     public void setAddress(GeoPoint address) {
         this.address = address;
     }
 
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public List<String> getOrderHistory() {
         return orderHistory;
     }
 
+    public void setOrderHistory(List<String> orderHistory) {
+        this.orderHistory = orderHistory;
+    }
+
     public String getProfilePic() {
         return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
 }

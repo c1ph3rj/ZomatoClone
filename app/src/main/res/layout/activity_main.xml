@@ -73,7 +73,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/submit"
             style="@style/NormalButtons"
-            android:layout_margin="4dp"
+            android:layout_margin="@dimen/M_4dp"
             android:text="@string/continue_Text"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"

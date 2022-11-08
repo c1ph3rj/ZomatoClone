@@ -1,19 +1,16 @@
 package com.c1ph3r.zomatocloneuser;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.c1ph3r.zomatocloneuser.databinding.ActivityMainBinding;
 import com.google.firebase.FirebaseApp;
@@ -30,69 +27,13 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding MAIN;
-    private FirebaseAuth AUTH;
+    private final static int REQUEST_CODE = 1;
     String code;
     FragmentTransaction fragmentTransaction;
     Fragment fragment;
     String verificationId;
-    private final static int REQUEST_CODE = 1;
-
-    @RequiresApi(api = Build.VERSION_CODES.Q)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // Binding the layout to a variable.
-        MAIN = ActivityMainBinding.inflate(getLayoutInflater());
-        // Getting the root of the layout and passing that to the contentView.
-        View view = MAIN.getRoot();
-        setContentView(view);
-
-        getLocationPermission();
-
-        // Firebase App Device Verification check.
-        FirebaseApp.initializeApp(this);
-        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
-        // Verify the mobile app by using play service instead opening a browser for captcha.
-        firebaseAppCheck.installAppCheckProviderFactory(PlayIntegrityAppCheckProviderFactory.getInstance());
-        // Firebase Initialization.
-        AUTH = FirebaseAuth.getInstance();
-
-        // On Click Continue Button it verifies the Mobile number with regex if the mobile number is verified it starts the OTP verification process
-        MAIN.submit.setOnClickListener(sendOTP -> {
-            if(Objects.requireNonNull(MAIN.mobileNumber.getText()).toString().matches(getString(R.string.MOBILE_NO_PATTERN))){
-                // Method to send OTP.
-                sendOTPToTheUser();
-            }
-            else{
-                // If the mobile no does not match the regex, Toast a message to the user.
-                Toast.makeText(this, getString(R.string.Not_Valid_Mobile_No), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-    private void getLocationPermission() {
-        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-    }
-
-    private void sendOTPToTheUser() {
-        // Method to send OTP to the user.
-        try{
-            PhoneAuthOptions options = PhoneAuthOptions.newBuilder(AUTH)
-                    .setPhoneNumber(getString(R.string.country_code_Text) + MAIN.mobileNumber.getText())
-                    .setTimeout(60L, TimeUnit.SECONDS)
-                    .setActivity(this)
-                    .setCallbacks(sendOTPCallBacks).build();
-            PhoneAuthProvider.verifyPhoneNumber(options);
-            MAIN.loadingTimeToSendOTP.setVisibility(View.VISIBLE);
-        }catch(Exception e){
-            MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
-            System.out.println(e.getMessage() + getString(R.string.exception_2));
-        }
-    }
-
-
+    private ActivityMainBinding MAIN;
+    private FirebaseAuth AUTH;
     // After verification code tries to send this method will be called.
     private final PhoneAuthProvider.OnVerificationStateChangedCallbacks sendOTPCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         // After code is sent to the user.
@@ -119,13 +60,79 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Binding the layout to a variable.
+        MAIN = ActivityMainBinding.inflate(getLayoutInflater());
+        // Getting the root of the layout and passing that to the contentView.
+        View view = MAIN.getRoot();
+        setContentView(view);
+
+        try {
+            getLocationPermission();
+
+            // Firebase App Device Verification check.
+            FirebaseApp.initializeApp(this);
+            FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
+            // Verify the mobile app by using play service instead opening a browser for captcha.
+            firebaseAppCheck.installAppCheckProviderFactory(PlayIntegrityAppCheckProviderFactory.getInstance());
+            // Firebase Initialization.
+            AUTH = FirebaseAuth.getInstance();
+
+            // On Click Continue Button it verifies the Mobile number with regex if the mobile number is verified it starts the OTP verification process
+            MAIN.submit.setOnClickListener(sendOTP -> {
+                if (Objects.requireNonNull(MAIN.mobileNumber.getText()).toString().matches(getString(R.string.MOBILE_NO_PATTERN))) {
+                    // Method to send OTP.
+                    sendOTPToTheUser();
+                } else {
+                    // If the mobile no does not match the regex, Toast a message to the user.
+                    Toast.makeText(this, getString(R.string.Not_Valid_Mobile_No), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    // Asking location permission from the user.
+    private void getLocationPermission() {
+        try {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendOTPToTheUser() {
+        // Method to send OTP to the user.
+        try {
+            PhoneAuthOptions options = PhoneAuthOptions.newBuilder(AUTH)
+                    .setPhoneNumber(getString(R.string.country_code_Text) + MAIN.mobileNumber.getText())
+                    .setTimeout(60L, TimeUnit.SECONDS)
+                    .setActivity(this)
+                    .setCallbacks(sendOTPCallBacks).build();
+            PhoneAuthProvider.verifyPhoneNumber(options);
+            MAIN.loadingTimeToSendOTP.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
+            MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
+            System.out.println(e.getMessage() + getString(R.string.exception_2));
+        }
+    }
+
     // Method to verify the user input with sent OTP.
     private void verifyTheOTP(String verificationId) {
-        MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
-        System.out.println(MAIN.mobileNumber.getText());
-        fragment = new OTP_Verification(Objects.requireNonNull(MAIN.mobileNumber.getText()).toString(), AUTH, verificationId);
-        fragmentTransaction = getSupportFragmentManager().beginTransaction().add(R.id.Login_Activity, fragment).addToBackStack("OnBackPressed");
-        fragmentTransaction.commit();
+        try {
+            MAIN.loadingTimeToSendOTP.setVisibility(View.GONE);
+            System.out.println(MAIN.mobileNumber.getText());
+            fragment = new OTP_Verification(Objects.requireNonNull(MAIN.mobileNumber.getText()).toString(), AUTH, verificationId);
+            fragmentTransaction = getSupportFragmentManager().beginTransaction().add(R.id.Login_Activity, fragment).addToBackStack("OnBackPressed");
+            fragmentTransaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

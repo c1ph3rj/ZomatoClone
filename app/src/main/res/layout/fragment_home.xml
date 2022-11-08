@@ -8,25 +8,9 @@
     tools:context=".Home">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/H_400dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,16 +19,35 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Feature Items:"
+            android:text="@string/feature_items_Text"
             style="@style/NormalText"
             android:layout_gravity="start"
             android:layout_marginStart="@dimen/M_20dp"
-            android:textSize="@dimen/TS_18sp"
+            android:textSize="@dimen/TS_20sp"
             android:fontFamily="@font/dm_bold"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/FavItems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/P_20dp" />
+            android:paddingStart="@dimen/P_20dp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/restaurants_around_you_Text"
+            style="@style/NormalText"
+            android:textSize="@dimen/TS_20sp"
+            android:paddingStart="@dimen/P_20dp"
+            android:fontFamily="@font/dm_bold"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/M_60dp"
+            android:id="@+id/listOfAllRestaurants" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

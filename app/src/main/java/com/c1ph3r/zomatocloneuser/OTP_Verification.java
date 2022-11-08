@@ -1,6 +1,5 @@
 package com.c1ph3r.zomatocloneuser;
 
-import static java.lang.Thread.sleep;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -25,7 +24,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationTokenSource;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,11 +46,11 @@ public class OTP_Verification extends Fragment {
     FirebaseAuth AUTH;
     PhoneAuthCredential phoneAuthCredential;
     String verificationId;
-    private FirebaseFirestore userDataBase;
-    private CollectionReference userDB;
     ProgressBar loading;
     Address address;
     DocumentReference user;
+    private FirebaseFirestore userDataBase;
+    private CollectionReference userDB;
 
 
     public OTP_Verification() {
@@ -86,7 +84,6 @@ public class OTP_Verification extends Fragment {
             mobileNumberDisplay.setText(mobileNumber);
             userDataBase = FirebaseFirestore.getInstance();
             userDB = userDataBase.collection("userDataBase");
-
 
 
             // Verifying the OTP using firebase auth.
@@ -127,9 +124,9 @@ public class OTP_Verification extends Fragment {
     private void ifTheUserIsNew() {
         user = userDB.document(mobileNumber);
         user.get().addOnSuccessListener(user -> {
-            if(user.exists() && !Objects.equals(user.get("userName"), " ")){
-              changePage();
-            }else {
+            if (user.exists() && !Objects.equals(user.get(getString(R.string.userName_Text)), " ")) {
+                changePage();
+            } else {
                 adduserToTheDB().addOnSuccessListener(addUser -> {
                     startActivity(new Intent(requireActivity(), Register.class));
                 });
@@ -144,7 +141,7 @@ public class OTP_Verification extends Fragment {
         listOfOrders = new ArrayList<>();
         UserDetails newUser = new UserDetails();
         newUser.setMobileNumber(mobileNumber);
-        newUser.setAddress(new GeoPoint(0,0));
+        newUser.setAddress(new GeoPoint(0, 0));
         newUser.setUserName(" ");
         newUser.setListOfAddress(listOfAddress);
         newUser.setOrderHistory(listOfOrders);
@@ -179,7 +176,7 @@ public class OTP_Verification extends Fragment {
                 addresses = fetchAddress.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 address = addresses.get(0);
                 System.out.println(address.getAddressLine(0));
-                user.update("address", new GeoPoint(address.getLatitude(), address.getLongitude()));
+                user.update(getString(R.string.address_Text), new GeoPoint(address.getLatitude(), address.getLongitude()));
             } catch (IOException e) {
                 e.printStackTrace();
             }

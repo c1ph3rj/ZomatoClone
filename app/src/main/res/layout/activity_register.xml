@@ -12,7 +12,7 @@
         style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="One Step More:"
+        android:text="@string/one_step_more_Text"
         android:textSize="@dimen/TS_24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:id="@+id/userName"
             android:layout_height="wrap_content"
-            android:hint="Enter Your Name"
+            android:hint="@string/enter_your_name_Text"
             android:textColor="?attr/colorPrimaryVariant" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,7 +56,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nextBtn"
         android:layout_width="wrap_content"
-        android:text="Next"
+        android:text="@string/next_Text"
         style="@style/NormalButtons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

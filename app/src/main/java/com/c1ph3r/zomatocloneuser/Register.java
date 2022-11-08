@@ -1,14 +1,13 @@
 package com.c1ph3r.zomatocloneuser;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.c1ph3r.zomatocloneuser.databinding.ActivityRegisterBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,33 +23,45 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Binding the view with Layout.
         REGISTER = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = REGISTER.getRoot();
         setContentView(view);
 
-        userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
-        userDB = FirebaseFirestore.getInstance();
-        user = userDB.collection("userDataBase").document(userID);
+        try {
+            // Declaring variables.
+            userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+            userDB = FirebaseFirestore.getInstance();
+            user = userDB.collection(getString(R.string.userDataBase_Text)).document(userID);
 
-       REGISTER.nextBtn.setOnClickListener(onClickNext-> {
-           REGISTER.loadingForUserName.setVisibility(View.VISIBLE);
-           updateUserName(Objects.requireNonNull(REGISTER.userName.getText()).toString());
-       });
+            // On click of register button update the userValues.
+            REGISTER.nextBtn.setOnClickListener(onClickNext -> {
+                REGISTER.loadingForUserName.setVisibility(View.VISIBLE);
+                updateUserName(Objects.requireNonNull(REGISTER.userName.getText()).toString());
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public void updateUserName( String userName){
-        user.update("userName", userName).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
+    // Method to update userData to the FireBaseFireStore.
+    public void updateUserName(String userName) {
+        try {
+            // updating the user data to the db.
+            user.update(getString(R.string.userName_Text), userName).addOnSuccessListener(unused -> {
                 REGISTER.loadingForUserName.setVisibility(View.INVISIBLE);
+                // If successful go to Dashboard.
                 startActivity(new Intent(Register.this, Dashboard.class));
                 finish();
-            }
-        }).addOnFailureListener(e -> {
-            REGISTER.loadingForUserName.setVisibility(View.INVISIBLE);
-            Toast.makeText(Register.this, "Failed to add! Check your Internet.", Toast.LENGTH_SHORT).show();
-        });
+            }).addOnFailureListener(e -> {
+                // if failed shows the error to the user.
+                REGISTER.loadingForUserName.setVisibility(View.INVISIBLE);
+                Toast.makeText(Register.this, R.string.Exception_3, Toast.LENGTH_SHORT).show();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

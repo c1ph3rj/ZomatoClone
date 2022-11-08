@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
-        android:background="@color/white"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/H_220dp"
-        android:layout_width="match_parent">
+        android:background="@color/white">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:toolbarId="@+id/toolbar"
+            app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="@color/white">
+            app:toolbarId="@+id/toolbar">
 
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:background="@color/white"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/H_110dp"
-                android:layout_width="match_parent">
+                android:background="@color/white">
 
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:stretchColumns="1">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/TS_18sp"
-                        android:textColor="@color/black"
                         android:fontFamily="@font/secular_regular"
-                        android:text="@string/zomato_Text"/>
-                    <TableRow
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/P_4dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:text="@string/zomato_Text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/TS_18sp" />
 
-                       <ImageView
-                           android:layout_width="@dimen/W_35dp"
-                           android:layout_height="@dimen/H_35dp"
-                           android:src="@drawable/location_ic"
-                           android:contentDescription="@string/location_icon_Label" />
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/P_4dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/W_35dp"
+                            android:layout_height="@dimen/H_35dp"
+                            android:contentDescription="@string/location_icon_Label"
+                            android:src="@drawable/location_ic" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -81,19 +83,21 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="@dimen/W_50dp"
-                            app:cardCornerRadius="@dimen/R_200dp"
-                            android:elevation="@dimen/E_2dp"
+                            android:layout_height="@dimen/H_50dp"
+                            android:layout_marginTop="@dimen/M_4dp"
                             android:layout_marginEnd="@dimen/M_30dp"
-                            android:backgroundTint="@color/lightWhite"
-                            android:layout_height="@dimen/H_50dp">
+                            android:layout_marginBottom="@dimen/M_4dp"
+                            android:backgroundTint="@color/neonWhite"
+                            android:elevation="@dimen/E_2dp"
+                            app:cardCornerRadius="@dimen/R_90dp">
 
                             <ImageView
                                 android:layout_width="@dimen/W_50dp"
-                                android:layout_height="36dp"
-                                android:contentDescription="@string/profileIconLabel_Text"
+                                android:layout_height="@dimen/H_36dp"
                                 android:layout_gravity="center"
-                                android:scaleType="center"
                                 android:clickable="true"
+                                android:contentDescription="@string/profileIconLabel_Text"
+                                android:scaleType="centerInside"
                                 android:src="@drawable/ic_baseline_person_24" />
 
                         </androidx.cardview.widget.CardView>
@@ -106,9 +110,8 @@
             </androidx.appcompat.widget.Toolbar>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/W_340dp"
                 android:layout_height="@dimen/H_110dp"
-                android:elevation="@dimen/E_8dp"
                 android:layout_gravity="bottom|center"
                 android:background="@color/white"
                 android:gravity="center_horizontal"
@@ -116,9 +119,9 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/NormalTextFields"
-                    android:padding="@dimen/P_4dp"
                     android:layout_width="@dimen/W_300dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/P_4dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -126,23 +129,67 @@
                         android:hint="@string/search_Text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingStart="20dp">
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scrollbars="none">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip"
-                        app:chipCornerRadius="6dp"
-                        android:elevation="@dimen/E_2dp"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:text="FastDelivery"
+                    <com.google.android.material.chip.ChipGroup
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.chip.ChipGroup>
+                        android:layout_height="match_parent"
+                        android:paddingStart="@dimen/P_20dp"
+                        tools:ignore="RtlSymmetry">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="@dimen/E_2dp"
+                            android:text="@string/fastDelivery_Text"
+                            app:chipCornerRadius="@dimen/R_6dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/Offers"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="@dimen/E_2dp"
+                            android:text="@string/great_offers_Text"
+                            app:chipCornerRadius="@dimen/R_6dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/Veg"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="@dimen/E_2dp"
+                            android:text="@string/pure_veg_Text"
+                            app:chipCornerRadius="@dimen/R_6dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/Ratings"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="@dimen/E_2dp"
+                            android:text="@string/ratings_4_0_Text"
+                            app:chipCornerRadius="@dimen/R_6dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/NonVeg"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="@dimen/E_2dp"
+                            android:text="@string/non_veg_Text"
+                            app:chipCornerRadius="@dimen/R_6dp" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
 
             </LinearLayout>
-
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -157,8 +204,8 @@
             android:id="@+id/Content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="@dimen/H_400dp"
             android:background="@color/white"
+            android:minHeight="@dimen/H_400dp"
             tools:context=".Dashboard">
 
             <androidx.viewpager2.widget.ViewPager2
@@ -172,18 +219,18 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_gravity="bottom"
         android:id="@+id/BottomNav"
-        app:tabIndicatorGravity="top"
-        app:tabTextAppearance="@style/tabText"
-        app:tabIndicatorAnimationMode="elastic"
-        app:tabIconTint="@drawable/bottom_navbar_item_background"
-        app:tabTextColor="?attr/colorPrimaryVariant"
-        app:tabSelectedTextColor="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/H_45dp"
+        android:layout_gravity="bottom"
         android:background="@color/white"
+        app:tabIconTint="@drawable/bottom_navbar_item_background"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorGravity="top"
         app:tabInlineLabel="true"
-        android:layout_height="@dimen/H_45dp">
+        app:tabSelectedTextColor="?attr/colorPrimary"
+        app:tabTextAppearance="@style/tabText"
+        app:tabTextColor="?attr/colorPrimaryVariant">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

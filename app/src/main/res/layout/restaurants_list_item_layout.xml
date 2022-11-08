@@ -1,65 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="160dp"
-        app:cardCornerRadius="@dimen/R_12dp"
-        app:cardElevation="@dimen/E_8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/M_20dp"
+        android:layout_marginRight="@dimen/M_20dp"
+        android:layout_marginTop="@dimen/M_10dp"
+        android:layout_marginBottom="@dimen/M_10dp"
         android:backgroundTint="@color/neonWhite"
-        android:layout_height="@dimen/H_220dp"
-        android:layout_margin="10dp"
+        app:cardCornerRadius="@dimen/R_15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" >
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
+                android:layout_height="@dimen/H_200dp"
+                android:background="@drawable/ic_launcher_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_launcher_background"
-                android:contentDescription="@string/food_pic_Text" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TableLayout
-                android:layout_width="158dp"
-                android:layout_height="110dp"
-                android:padding="@dimen/P_4dp"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/H_100dp"
+                android:maxHeight="@dimen/H_140dp"
                 android:stretchColumns="0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager2"
                 app:layout_constraintVertical_bias="0.5">
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center">
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/hotel_name_Text"
+                        android:paddingStart="@dimen/P_6dp"
                         style="@style/NormalText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dm_bold"
-                        android:text="@string/hotelName_Text"
-                        android:textSize="@dimen/TS_12sp" />
+                        android:fontFamily="@font/metropolis_bold"
+                        android:textSize="@dimen/TS_20sp"
+                        tools:ignore="RtlSymmetry" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/Ratings"
@@ -68,8 +74,9 @@
                         android:clickable="false"
                         android:fontFamily="@font/dm_regular"
                         android:gravity="center"
-                        android:padding="@dimen/P_4dp"
+                        android:layout_marginEnd="@dimen/M_10dp"
                         android:text="@string/Ratings_Text"
+                        android:padding="@dimen/P_4dp"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="@dimen/TS_12sp"
@@ -79,24 +86,7 @@
                         app:iconPadding="@dimen/P_2dp"
                         app:iconSize="@dimen/Size_15dp" />
 
-                </TableRow>
 
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_marginTop="@dimen/M_3dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/lightWhite"
-                        android:fontFamily="@font/dm_bold"
-                        android:drawablePadding="@dimen/P_2dp"
-                        style="@style/NormalText"
-                        android:text="@string/delivery_time_Text"
-                        android:textSize="@dimen/TS_12sp"
-                        app:drawableStartCompat="@drawable/time_ic" />
                 </TableRow>
 
                 <TableRow
@@ -104,23 +94,32 @@
                     android:layout_height="match_parent" >
 
                     <TextView
-                        style="@style/NormalText"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="@dimen/P_2dp"
-                        android:drawablePadding="@dimen/P_4dp"
-                        android:gravity="center_vertical"
-                        android:text="@string/price_Text"
-                        android:fontFamily="@font/dm_bold"
+                        android:text="@string/type_of_foods_Text"
+                        android:paddingEnd="@dimen/P_8dp"
+                        style="@style/NormalText"
                         android:textColor="@color/lightWhite"
-                        android:textSize="@dimen/TS_12sp"
-                        android:layout_marginTop="3dp"
-                        app:drawableStartCompat="@drawable/rupee_ic" />
+                        android:textSize="@dimen/TS_14sp"
+                        android:fontFamily="@font/metropolis_semi_bold"
+                        android:paddingStart="@dimen/P_8dp"
+                        tools:ignore="RtlSymmetry" />
 
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:text="@string/price_for_one_Text"
+                        android:fontFamily="@font/metropolis_semi_bold"
+                        android:textColor="@color/lightWhite"
+                        style="@style/NormalText"
+                        android:paddingStart="@dimen/P_6dp"
+                        android:paddingEnd="@dimen/P_6dp"/>
 
                 </TableRow>
 
+
             </TableLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

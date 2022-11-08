@@ -1,19 +1,15 @@
 package com.c1ph3r.zomatocloneuser.Adapter;
 
-import android.view.MotionEvent;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.ArrayList;
 
 public class BottomNavAdapter extends FragmentStateAdapter {
     boolean enabled;
-    private ArrayList<Fragment> listOfFragments = new ArrayList<>();
+    private final ArrayList<Fragment> listOfFragments = new ArrayList<>();
 
     public BottomNavAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -31,7 +27,7 @@ public class BottomNavAdapter extends FragmentStateAdapter {
         return listOfFragments.size();
     }
 
-    public void addFragment(Fragment fragment){
+    public void addFragment(Fragment fragment) {
         listOfFragments.add(fragment);
     }
 
