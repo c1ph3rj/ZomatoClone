@@ -64,6 +64,7 @@ public class SplashScreen extends AppCompatActivity {
             DocumentReference user = userDB.collection("userDataBase")
                     .document(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
             updateLocation(user);
+
             intent = new Intent(this, Dashboard.class);
         }
     }
@@ -78,9 +79,4 @@ public class SplashScreen extends AppCompatActivity {
         }).addOnFailureListener(Throwable::printStackTrace);
     }
 
-
-    public void userData(){
-        DataBase userDB = new DataBase();
-        userDB.getUserData(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
-    }
 }

@@ -28,30 +28,20 @@ public class DataBase {
         return userDetails;
     }
 
-    public boolean isUserHaveSavedData(String mobileNumber){
-        boolean[] isUserPresentAlready = {false};
-        if(mobileNumber != null){
-            userDB.document(mobileNumber).get()
-                    .addOnSuccessListener(user -> {
-                        if(user.exists() && !Objects.equals(user.get("userName"), " "))
-                            isUserPresentAlready[0] = true;
-                    });
-        }
-        return isUserPresentAlready[0];
-    }
 
 
-    public boolean addUserData(String mobileNumber, GeoPoint address){
+    public boolean addUserData(String mobileNumber ){
         List<String> listOfAddress, listOfOrders;
         listOfAddress = new ArrayList<>();
         listOfOrders = new ArrayList<>();
         UserDetails newUser = new UserDetails();
         newUser.setMobileNumber(mobileNumber);
-        newUser.setAddress(address);
+        newUser.setAddress(new GeoPoint(0,0));
         newUser.setUserName(" ");
         newUser.setListOfAddress(listOfAddress);
         newUser.setOrderHistory(listOfOrders);
-        return userDB.add(newUser).isSuccessful();
+        newUser.setProfilePic(" ");
+        return userDB.document(mobileNumber).set(newUser).isSuccessful();
     }
 
     public boolean updateUserLocation(String mobileNumber, GeoPoint geoPoint){

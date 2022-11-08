@@ -40,17 +40,26 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Dashboard extends AppCompatActivity implements LocationListener {
     // Declaring a variable.
     private ActivityDashboardBinding DASHBOARD;
     Address address;
+    private FirebaseFirestore userDataBase;
+    DocumentReference user;
+    String userID;
 
     // Dashboard.
     @SuppressLint("MissingPermission")
@@ -61,6 +70,9 @@ public class Dashboard extends AppCompatActivity implements LocationListener {
         DASHBOARD = ActivityDashboardBinding.inflate(getLayoutInflater());
         View view = DASHBOARD.getRoot();
         setContentView(view);
+        userDataBase = FirebaseFirestore.getInstance();
+        userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+        user = userDataBase.collection("userDataBase").document(userID);
 
 
         // Method to check if the user turn off the permission for location.
@@ -124,7 +136,10 @@ public class Dashboard extends AppCompatActivity implements LocationListener {
         DASHBOARD.Area.setText(address.getSubLocality());
         String city = address.getLocality() + ","+ address.getAdminArea() + ".";
         DASHBOARD.City.setText(city);
+        updateLocation(address.getLatitude(), address.getLongitude());
     }
+
+    public void updateLocation(double lat, double lon){user.update("address", new GeoPoint(lat , lon)).isSuccessful();}
 
 
     @Override

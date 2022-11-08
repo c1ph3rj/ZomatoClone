@@ -1,5 +1,7 @@
 package com.c1ph3r.zomatocloneuser;
 
+import static java.lang.Thread.sleep;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,20 +20,27 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.c1ph3r.zomatocloneuser.FireBaseFireStore.DataBase;
+import com.c1ph3r.zomatocloneuser.Model.UserDetails;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationTokenSource;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 
 public class OTP_Verification extends Fragment {
@@ -39,8 +48,8 @@ public class OTP_Verification extends Fragment {
     FirebaseAuth AUTH;
     PhoneAuthCredential phoneAuthCredential;
     String verificationId;
-    DataBase userDB;
-    //private FirebaseFirestore userDB;
+    private FirebaseFirestore userDataBase;
+    private CollectionReference userDB;
     ProgressBar loading;
     Address address;
     DocumentReference user;
@@ -75,8 +84,9 @@ public class OTP_Verification extends Fragment {
             TextView mobileNumberDisplay = view.findViewById(R.id.mobileNumberDisplay);
             this.mobileNumber = getString(R.string.country_code_Text) + mobileNumber;
             mobileNumberDisplay.setText(mobileNumber);
-            //userDB = FirebaseFirestore.getInstance();
-            userDB = new DataBase();
+            userDataBase = FirebaseFirestore.getInstance();
+            userDB = userDataBase.collection("userDataBase");
+
 
 
             // Verifying the OTP using firebase auth.
@@ -115,14 +125,31 @@ public class OTP_Verification extends Fragment {
     }
 
     private void ifTheUserIsNew() {
-        if (userDB.isUserHaveSavedData(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber())) {
+        user = userDB.document(mobileNumber);
+        user.get().addOnSuccessListener(user -> {
+            if(user.exists() && !Objects.equals(user.get("userName"), " ")){
+              changePage();
+            }else {
+                adduserToTheDB().addOnSuccessListener(addUser -> {
+                    startActivity(new Intent(requireActivity(), Register.class));
+                });
+            }
             loading.setVisibility(View.INVISIBLE);
-            changePage();
+        }).addOnFailureListener(Throwable::printStackTrace);
+    }
 
-        } else {
-            loading.setVisibility(View.INVISIBLE);
-            startActivity(new Intent(requireActivity(), Register.class));
-        }
+    private Task<Void> adduserToTheDB() {
+        List<String> listOfAddress, listOfOrders;
+        listOfAddress = new ArrayList<>();
+        listOfOrders = new ArrayList<>();
+        UserDetails newUser = new UserDetails();
+        newUser.setMobileNumber(mobileNumber);
+        newUser.setAddress(new GeoPoint(0,0));
+        newUser.setUserName(" ");
+        newUser.setListOfAddress(listOfAddress);
+        newUser.setOrderHistory(listOfOrders);
+        newUser.setProfilePic(" ");
+        return userDB.document(mobileNumber).set(newUser);
     }
 
 
@@ -131,7 +158,6 @@ public class OTP_Verification extends Fragment {
         // If the user already allows the permission it forwards to the dashboard.
         // Else it force the user to allows the permission.
         Intent intent;
-
         if (!(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
             intent = new Intent(requireActivity(), EnableLocationPermission.class);
         } else {
@@ -153,7 +179,7 @@ public class OTP_Verification extends Fragment {
                 addresses = fetchAddress.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 address = addresses.get(0);
                 System.out.println(address.getAddressLine(0));
-                user.update("currentAddress", address.getAddressLine(0));
+                user.update("address", new GeoPoint(address.getLatitude(), address.getLongitude()));
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -84,16 +84,17 @@
                             app:cardCornerRadius="@dimen/R_200dp"
                             android:elevation="@dimen/E_2dp"
                             android:layout_marginEnd="@dimen/M_30dp"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/lightWhite"
                             android:layout_height="@dimen/H_50dp">
 
                             <ImageView
                                 android:layout_width="@dimen/W_50dp"
-                                android:layout_height="@dimen/H_50dp"
+                                android:layout_height="36dp"
+                                android:contentDescription="@string/profileIconLabel_Text"
+                                android:layout_gravity="center"
                                 android:scaleType="center"
-
-                                android:src="@drawable/ic_baseline_person_24"
-                                android:contentDescription="@string/profileIconLabel_Text" />
+                                android:clickable="true"
+                                android:src="@drawable/ic_baseline_person_24" />
 
                         </androidx.cardview.widget.CardView>
 
