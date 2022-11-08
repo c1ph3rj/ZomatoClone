@@ -108,7 +108,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/H_110dp"
-                android:paddingTop="@dimen/P_6dp"
                 android:elevation="@dimen/E_8dp"
                 android:layout_gravity="bottom|center"
                 android:background="@color/white"
@@ -126,6 +125,21 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/search_Text" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="20dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip"
+                        app:chipCornerRadius="6dp"
+                        android:elevation="@dimen/E_2dp"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:text="FastDelivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.chip.ChipGroup>
 
             </LinearLayout>
 

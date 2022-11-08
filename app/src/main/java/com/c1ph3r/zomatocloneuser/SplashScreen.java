@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.c1ph3r.zomatocloneuser.FireBaseFireStore.DataBase;
+import com.c1ph3r.zomatocloneuser.Model.UserDetails;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
@@ -40,6 +41,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
 
+
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
             intent = new Intent(this, MainActivity.class);
         else {
@@ -50,9 +52,6 @@ public class SplashScreen extends AppCompatActivity {
             startActivity(intent);
             finish();
         }, LOADING_TIME);
-
-
-
     }
 
 

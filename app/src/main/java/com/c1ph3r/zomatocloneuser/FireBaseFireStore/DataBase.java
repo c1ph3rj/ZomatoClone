@@ -1,6 +1,10 @@
 package com.c1ph3r.zomatocloneuser.FireBaseFireStore;
 
+import androidx.annotation.NonNull;
+
 import com.c1ph3r.zomatocloneuser.Model.UserDetails;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,7 +33,6 @@ public class DataBase {
     }
 
 
-
     public boolean addUserData(String mobileNumber ){
         List<String> listOfAddress, listOfOrders;
         listOfAddress = new ArrayList<>();
@@ -46,10 +49,6 @@ public class DataBase {
 
     public boolean updateUserLocation(String mobileNumber, GeoPoint geoPoint){
         return userDB.document(mobileNumber).update("address", geoPoint).isSuccessful();
-    }
-
-    public boolean updateUserName(String mobileNumber, String userName){
-        return userDB.document(mobileNumber).update("userName", userName).isSuccessful();
     }
 
     public boolean updateListOfAddress(String mobileNumber, List<String> listOfAddress){

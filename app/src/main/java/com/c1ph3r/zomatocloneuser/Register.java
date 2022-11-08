@@ -1,6 +1,5 @@
 package com.c1ph3r.zomatocloneuser;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.c1ph3r.zomatocloneuser.databinding.ActivityRegisterBinding;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;

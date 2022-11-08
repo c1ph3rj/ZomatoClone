@@ -101,6 +101,7 @@ public class Dashboard extends AppCompatActivity implements LocationListener {
             tab.setText(listOfNames[position]);
             tab.setIcon(AppCompatResources.getDrawable(Dashboard.this, listOfImages[position]));
         }).attach();
+        DASHBOARD.LayoutForFragments.setUserInputEnabled(false);
     }// End Of BottomNavigation.
 
 

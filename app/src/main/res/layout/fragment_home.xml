@@ -2,23 +2,49 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/HomePage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/HomePage"
     tools:context=".Home">
 
-    <TextView
-        android:id="@+id/textView5"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/H_400dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
+        app:layout_constraintVertical_bias="0.5">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feature Items:"
+            style="@style/NormalText"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/M_20dp"
+            android:textSize="@dimen/TS_18sp"
+            android:fontFamily="@font/dm_bold"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/FavItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/P_20dp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

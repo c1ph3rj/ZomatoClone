@@ -41,6 +41,11 @@
     <dimen name="H_276dp">276dp</dimen>
     <dimen name="TS_40sp">40sp</dimen>
     <dimen name="M_220dp">220dp</dimen>
+    <dimen name="W_200dp">200dp</dimen>
+    <dimen name="R_15dp">15dp</dimen>
+    <dimen name="P_20dp">20dp</dimen>
+    <dimen name="M_10dp">10dp</dimen>
+    <dimen name="M_20dp">20dp</dimen>
 
 
 </resources>
