@@ -2,6 +2,7 @@ package com.c1ph3r.zomatocloneuser;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -24,6 +25,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationTokenSource;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -137,6 +139,21 @@ public class Dashboard extends AppCompatActivity implements LocationListener {
         user.update(getString(R.string.address_Text), new GeoPoint(lat, lon)).isSuccessful();
     }
 
+    // Overriding onBackPressed.
+    @Override
+    public void onBackPressed() {
+        // On back pressed ask the user to exit if the viewpager was on Home screen.
+        if(DASHBOARD.LayoutForFragments.getCurrentItem() == 0){
+            MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this)
+                    .setTitle(R.string.Zomato_Text).setMessage(R.string.Exit_Text)
+                    .setPositiveButton(R.string.Yes_Text, (dialogInterface, i) -> finishAffinity())
+                    .setNegativeButton(R.string.No_Text, (dialogInterface, i) -> dialogInterface.cancel());
+            dialog.show();
+        }else
+            // If the viewpager not in Home page set the view pager current item to home page.
+            DASHBOARD.LayoutForFragments.setCurrentItem(0);
+
+    }// End of onBackPressed.
 
     @Override
     public void onLocationChanged(@NonNull Location location) {

@@ -57,4 +57,8 @@
     <string name="userName_Text">userName</string>
     <string name="userDataBase_Text">userDataBase</string>
     <string name="Exception_3">Failed to add! Check your Internet.</string>
+    <string name="Zomato_Text">Zomato</string>
+    <string name="Exit_Text">Do you want to exit ?</string>
+    <string name="Yes_Text">Yes</string>
+    <string name="No_Text">No</string>
 </resources>
