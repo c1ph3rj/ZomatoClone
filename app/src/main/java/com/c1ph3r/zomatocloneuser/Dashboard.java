@@ -2,7 +2,6 @@ package com.c1ph3r.zomatocloneuser;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
