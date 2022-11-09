@@ -33,7 +33,7 @@ public class Home extends Fragment {
                 FavItemsList = view.findViewById(R.id.FavItems);
                 FavItems favItems = new FavItems(requireActivity());
                 FavItemsList.setAdapter(favItems);
-                FavItemsList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+                FavItemsList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
                 // Declaring and assigning the data to the recycle viewer. (Restaurant List).
                 RestaurantList = view.findViewById(R.id.listOfAllRestaurants);
